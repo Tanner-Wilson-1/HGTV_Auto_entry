@@ -41,8 +41,8 @@ for emails in all_email:
     browser.get(foodnetwork_url)
     browser.maximize_window()
 
-    time.sleep(2)
-    browser.switch_to.frame(browser.find_element(By.XPATH, foodnetwork_ngxFrame))
+    time.sleep(5)
+    browser.switch_to.frame(browser.find_element(By.ID, foodnetwork_ngxFrame))
 
     time.sleep(2)
     email_input = browser.find_element(By.ID, "xReturningUserEmail")
@@ -54,7 +54,7 @@ for emails in all_email:
 
     browser.switch_to.default_content()
     time.sleep(2)
-    browser.switch_to.frame(browser.find_element(By.XPATH, foodnetwork_ngxFrame))
+    browser.switch_to.frame(browser.find_element(By.ID, foodnetwork_ngxFrame))
     action = ActionChains(browser)
     action.send_keys(Keys.TAB)
     action.send_keys(Keys.ENTER)
