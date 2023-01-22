@@ -8,9 +8,9 @@ import time
 
 hgtv_url = 'https://www.hgtv.com/sweepstakes/hgtv-dream-home/sweepstakes'
 foodnetwork_url = 'https://www.foodnetwork.com/sponsored/sweepstakes/hgtv-dream-home-sweepstakes'
-all_email = ['tannerw2013@gmail.com', 'KevinBiedrzycki@gmail.com', 'meghannlkirby@gmail.com']
 HGTV_ngxFrame = 'ngxFrame230599'
 foodnetwork_ngxFrame = 'ngxFrame230603'
+all_email = ['tannerw2013@gmail.com', 'KevinBiedrzycki@gmail.com', 'meghannlkirby@gmail.com']
 browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 for emails in all_email:
