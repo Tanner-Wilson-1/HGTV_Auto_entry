@@ -11,6 +11,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import config
 
+#set some variables
 hgtv_url = 'https://www.hgtv.com/sweepstakes/hgtv-dream-home/sweepstakes'
 foodnetwork_url = 'https://www.foodnetwork.com/sponsored/sweepstakes/hgtv-dream-home-sweepstakes'
 HGTV_ngxFrame = 'ngxFrame230599'
@@ -20,6 +21,7 @@ browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 send_success_emails = config.success_emails
 my_email = config.my_email
 
+# Use Selenium to enter both sweeps for each email in 'all_email'
 for emails in all_email:
     browser.get(hgtv_url)
     browser.maximize_window()
@@ -68,9 +70,9 @@ for emails in all_email:
     action.perform()
 
     time.sleep(5)
-
 browser.quit()
 
+#setup for sending confirmation emails
 password = config.password
 content = 'Filled out your entry forms! Buy me a coffee: https://www.buymeacoffee.com/tannerw201S'
 
@@ -87,4 +89,5 @@ for email in send_success_emails:
     session.sendmail(my_email, email, text)
     session.quit()
     print('Mail Sent to: ' + email)
+#Running this via Windows task scheduler, so need to exit the script to avoid next day failures
 exit()
