@@ -10,6 +10,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import config
+import CatFacts
 
 #set some variables
 hgtv_url = 'https://www.hgtv.com/sweepstakes/hgtv-dream-home/sweepstakes'
@@ -74,7 +75,7 @@ browser.quit()
 
 #setup for sending confirmation emails
 password = config.password
-content = 'Filled out your entry forms! Buy me a coffee: https://www.buymeacoffee.com/tannerw201S'
+content = CatFacts.get_cat_facts()
 
 for email in send_success_emails:
     message = MIMEMultipart()
