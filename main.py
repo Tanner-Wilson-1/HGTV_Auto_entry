@@ -13,16 +13,17 @@ import config
 import CatFacts
 
 #set some variables
-hgtv_url = 'https://www.hgtv.com/sweepstakes/hgtv-dream-home/sweepstakes'
-foodnetwork_url = 'https://www.foodnetwork.com/sponsored/sweepstakes/hgtv-dream-home-sweepstakes'
-HGTV_ngxFrame = 'ngxFrame230599'
-foodnetwork_ngxFrame = 'ngxFrame230603'
+hgtv_url = 'https://www.hgtv.com/sweepstakes/hgtv-smart-home/sweepstakes'
+foodnetwork_url = 'https://www.foodnetwork.com/sponsored/sweepstakes/hgtv-smart-home-sweepstakes'
+HGTV_ngxFrame = 'ngxFrame243797'
+foodnetwork_ngxFrame = 'ngxFrame243801'
 all_email = config.entry_emails
 browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 send_success_emails = config.success_emails
 my_email = config.my_email
 
 # Use Selenium to enter both sweeps for each email in 'all_email'
+# to-do add try catch blocks to account for failures instead of assuming it works
 for emails in all_email:
     browser.get(hgtv_url)
     browser.maximize_window()
@@ -46,6 +47,7 @@ for emails in all_email:
     action.send_keys(Keys.ENTER)
     action.perform()
 
+    print(emails + " has been entered into HGTV.")
     time.sleep(10)
 
     browser.get(foodnetwork_url)
@@ -71,12 +73,15 @@ for emails in all_email:
     action.perform()
 
     time.sleep(5)
+    print(emails + " has been entered into Food Network.")
 browser.quit()
 
-#setup for sending confirmation emails
+# setup for sending confirmation emails
 password = config.password
-content = CatFacts.get_cat_facts()
+# To-do: Make it so it doesn't share a fact that's already been sent
+content = "Enjoy today's Cat Fact! \n" + CatFacts.get_cat_facts()
 
+# to-do: Move email into the original for loop and only send if successfully entered
 for email in send_success_emails:
     message = MIMEMultipart()
     message['From'] = my_email
@@ -90,5 +95,5 @@ for email in send_success_emails:
     session.sendmail(my_email, email, text)
     session.quit()
     print('Mail Sent to: ' + email)
-#Running this via Windows task scheduler, so need to exit the script to avoid next day failures
+# Running this via Windows task scheduler, so need to exit the script to avoid next day failures
 exit()
